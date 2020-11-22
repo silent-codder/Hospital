@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class MainActivity extends AppCompatActivity {
 
     Button mBtnPatient,mBtnHospitalStaff;
@@ -30,5 +33,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this,HospitalStaffLogin.class));
             }
         });
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null){
+            startActivity(new Intent(MainActivity.this,PatientRegister_2.class));
+            fileList();
+        }
     }
 }

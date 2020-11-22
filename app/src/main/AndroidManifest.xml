@@ -9,7 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Hospital">
-        <activity android:name=".HospitalStaffLogin"></activity>
+        <activity android:name=".PatientRegister_3"></activity>
+        <activity android:name=".PatientRegister_2" />
+        <activity android:name=".PatientRegisterOtp" />
+        <activity android:name=".PatientRegister_1" />
+        <activity android:name=".PatientLoginOtp" />
+        <activity android:name=".Patient.PatientMainActivity" />
+        <activity android:name=".Counter.CounterMainActivity" />
+        <activity android:name=".HospitalStaffLogin" />
         <activity android:name=".PatientLogin" />
         <activity android:name=".MainActivity">
             <intent-filter>

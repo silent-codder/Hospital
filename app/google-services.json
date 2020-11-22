@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "1059861035452",
+    "firebase_url": "https://smart-hospital-afb6f.firebaseio.com",
+    "project_id": "smart-hospital-afb6f",
+    "storage_bucket": "smart-hospital-afb6f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1059861035452:android:05dc5b6e88b36570e853b9",
+        "android_client_info": {
+          "package_name": "com.silentcodder.hospital"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1059861035452-k0fovun0jfnv0kd8q76nljldle7rt9ld.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFMIRDT5Ye1lUfSRvfizOj8dUNFApLs-g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1059861035452-k0fovun0jfnv0kd8q76nljldle7rt9ld.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1059861035452:android:3b39d16a9d798cfee853b9",
+        "android_client_info": {
+          "package_name": "com.silentcodder.smarthospital"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1059861035452-ivvq7flmqsrg3oei2joi88lodtnuj5qk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.silentcodder.smarthospital",
+            "certificate_hash": "211f239090956880a153cdcb93629e84b310fb81"
+          }
+        },
+        {
+          "client_id": "1059861035452-k0fovun0jfnv0kd8q76nljldle7rt9ld.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFMIRDT5Ye1lUfSRvfizOj8dUNFApLs-g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1059861035452-k0fovun0jfnv0kd8q76nljldle7rt9ld.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

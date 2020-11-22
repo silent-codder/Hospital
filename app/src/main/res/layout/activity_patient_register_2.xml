@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".PatientRegister_2">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/bg_img"
+        android:scaleType="centerCrop"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Parent Details"
+        android:textStyle="bold"
+        android:textColor="@color/purple_500"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="140dp"
+        android:textSize="40sp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            app:cardCornerRadius="20dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="20dp"
+                android:gravity="center">
+
+                <EditText
+                    android:id="@+id/firstName"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:hint="First Name"
+                    android:layout_centerHorizontal="true"
+                    android:padding="10dp"
+                    android:background="@drawable/edit_txt_bg"/>
+                <EditText
+                    android:id="@+id/lastName"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/firstName"
+                    android:hint="Last Name"
+                    android:layout_marginTop="10dp"
+                    android:layout_centerHorizontal="true"
+                    android:padding="10dp"
+                    android:background="@drawable/edit_txt_bg"/>
+                <EditText
+                    android:id="@+id/address"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/lastName"
+                    android:hint="Village / City"
+                    android:layout_centerHorizontal="true"
+                    android:padding="10dp"
+                    android:background="@drawable/edit_txt_bg"/>
+
+                <Button
+                    android:id="@+id/btnNext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/address"
+                    android:layout_marginTop="10dp"
+                    android:text="Next"
+                    android:textColor="@color/white"
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold" />
+
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+</RelativeLayout>
