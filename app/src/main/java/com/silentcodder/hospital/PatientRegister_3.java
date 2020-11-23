@@ -26,6 +26,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.silentcodder.hospital.Patient.PatientMainActivity;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -153,7 +154,7 @@ public class PatientRegister_3 extends AppCompatActivity {
                                     if (task.isSuccessful()){
                                         pd.dismiss();
                                         Toast.makeText(PatientRegister_3.this, "Upload", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(PatientRegister_3.this, MainActivity.class));
+                                        startActivity(new Intent(PatientRegister_3.this, PatientMainActivity.class));
                                         finish();
                                     }
                                 }

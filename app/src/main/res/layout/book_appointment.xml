@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="320dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="20dp"
+    android:layout_gravity="center">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/btnCancel"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_cancel"/>
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_below="@id/btnCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Book Appointment"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/purple_500"
+            android:layout_centerHorizontal="true"/>
+
+        <EditText
+            android:id="@+id/childName"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:hint="Child Name"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/edit_txt_bg"
+            android:layout_below="@+id/text"
+            android:layout_centerHorizontal="true"/>
+        <EditText
+            android:id="@+id/childProblem"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:padding="10dp"
+            android:gravity="start"
+            android:hint="Write problem (Optional)"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edit_txt_bg"
+            android:layout_below="@+id/childName"
+            android:layout_centerHorizontal="true"/>
+        <EditText
+            android:id="@+id/appointmentDate"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:hint="Appointment Date"
+            android:layout_marginTop="10dp"
+            android:drawableRight="@drawable/ic_calendar"
+            android:background="@drawable/edit_txt_bg"
+            android:layout_below="@+id/childProblem"
+            android:layout_centerHorizontal="true"/>
+
+        <Button
+            android:id="@+id/btnBookAppointment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Book Appointment"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            android:textAllCaps="false"
+            android:layout_below="@id/appointmentDate"
+            android:layout_centerHorizontal="true"/>
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

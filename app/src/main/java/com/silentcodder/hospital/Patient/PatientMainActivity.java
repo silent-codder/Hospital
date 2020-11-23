@@ -58,16 +58,16 @@ public class PatientMainActivity extends AppCompatActivity {
                 item.setChecked(true);
 
                 switch (item.getItemId()){
-                    case R.id.nav_counter_home :
+                    case R.id.nav_patient_home :
                         selectFragment = new PatientHomeFragment();
                         break;
-                    case R.id.nav_counter_search :
+                    case R.id.nav_patient_hitory :
                         selectFragment = new PatientHistoryFragment();
                         break;
-                    case R.id.nav_counter_profile :
+                    case R.id.nav_patient_profile :
                         selectFragment = new PatientProfileFragment();
                         break;
-                    case R.id.nav_counter_logout :
+                    case R.id.nav_patient_logout :
                         logOut();
                         break;
                 }

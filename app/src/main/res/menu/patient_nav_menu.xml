@@ -10,7 +10,7 @@
     <item android:id="@+id/nav_patient_profile"
         android:icon="@drawable/ic_person"
         android:title="Profile"/>
-    <item android:id="@+id/nav_counter_logout"
+    <item android:id="@+id/nav_patient_logout"
         android:icon="@drawable/ic_logout"
         android:title="Log Out"/>
 </menu>

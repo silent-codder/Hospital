@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.silentcodder.hospital.Patient.PatientMainActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null){
-            startActivity(new Intent(MainActivity.this,PatientRegister_2.class));
+            startActivity(new Intent(MainActivity.this, PatientMainActivity.class));
             fileList();
         }
     }
