@@ -3,13 +3,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="56dp"
     tools:context=".Patient.Fragments.PatientHistoryFragment">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/bg_img"
+        android:scaleType="centerCrop"/>
+
     <TextView
+        android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="History"
-        android:textSize="40sp"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:textColor="#515151"
+        android:text="Appointments"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recycleView"/>
+
+    <ImageView
+        android:id="@+id/noData"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/no_data"
+        android:visibility="gone"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"/>
+    <TextView
+        android:id="@+id/noDataText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Not yet appointments.."
+        android:layout_below="@id/noData"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"
+        android:textSize="16sp"/>
+
 </RelativeLayout>

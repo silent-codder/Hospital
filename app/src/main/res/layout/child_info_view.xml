@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="15dp"
+    android:layout_margin="10dp"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+       <de.hdodenhof.circleimageview.CircleImageView
+           android:id="@+id/childImg"
+           android:layout_width="120dp"
+           android:layout_height="120dp"
+           android:src="@drawable/child_img"/>
+
+        <TextView
+            android:id="@+id/childName"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Ajinkya"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_below="@id/childImg"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/file"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="File Number : "
+            android:layout_toRightOf="@id/childImg"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"/>
+        <TextView
+            android:id="@+id/fileNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text=""
+            android:layout_toRightOf="@id/file"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/birth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Birth Date : "
+            android:layout_toRightOf="@id/childImg"
+            android:layout_below="@id/file"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"/>
+        <TextView
+            android:id="@+id/birthDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textStyle="bold"
+            android:layout_toRightOf="@id/birth"
+            android:layout_below="@id/fileNumber"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/gen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gender : "
+            android:layout_toRightOf="@id/childImg"
+            android:layout_below="@id/birth"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"/>
+        <TextView
+            android:id="@+id/gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textStyle="bold"
+            android:layout_toRightOf="@id/birth"
+            android:layout_below="@id/birthDate"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"/>
+
+        <Button
+            android:id="@+id/btnFileOpen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Open File"
+            android:textAllCaps="false"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:layout_below="@id/gender"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

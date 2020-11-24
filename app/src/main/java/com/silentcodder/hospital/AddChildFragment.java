@@ -1,16 +1,19 @@
 package com.silentcodder.hospital;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import android.text.TextUtils;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -23,16 +26,19 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.silentcodder.hospital.Patient.Fragments.PatientHomeFragment;
 import com.silentcodder.hospital.Patient.PatientMainActivity;
 
 import java.util.Calendar;
 import java.util.HashMap;
 
-public class PatientRegister_3 extends AppCompatActivity {
+
+public class AddChildFragment extends Fragment {
 
     RadioGroup radioGroup;
     RadioButton mGenderRadioBtn;
@@ -48,22 +54,31 @@ public class PatientRegister_3 extends AppCompatActivity {
 
     FirebaseFirestore firebaseFirestore;
     FirebaseAuth firebaseAuth;
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_patient_register_3);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_add_child, container, false);
 
-        findIds();
+        radioGroup = view.findViewById(R.id.radioGroup);
+        mBtnNext = view.findViewById(R.id.btnNext);
+        mChildDOB = view.findViewById(R.id.childDOB);
+        mChildName = view.findViewById(R.id.childName);
+        mWeight = view.findViewById(R.id.childWeight);
 
         calendar = Calendar.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
         UserId = firebaseAuth.getCurrentUser().getUid();
-        pd = new ProgressDialog(this);
+        pd = new ProgressDialog(getContext());
 
-
-        mPhone = getIntent().getStringExtra("mobileNumber");
+        firebaseFirestore.collection("Parent-Details").document(UserId).get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        String moNo = task.getResult().getString("Mobile-Number");
+                        mPhone = moNo;
+                    }
+                });
 
         firebaseFirestore.collection("Child-Details").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -73,7 +88,7 @@ public class PatientRegister_3 extends AppCompatActivity {
                     String size = String.valueOf(count);
 
                     if (size.isEmpty()){
-                        fileNumber = "1";
+                        fileNumber = "0";
                     }else {
                         fileNumber = size;
                     }
@@ -86,7 +101,7 @@ public class PatientRegister_3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(PatientRegister_3.this,new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int day) {
 
@@ -104,10 +119,10 @@ public class PatientRegister_3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int selectId = radioGroup.getCheckedRadioButtonId();
-                mGenderRadioBtn = findViewById(selectId);
+                mGenderRadioBtn = view.findViewById(selectId);
                 if (selectId == -1)
                 {
-                    Toast toast = Toast.makeText(PatientRegister_3.this,"Select child sex",Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(getContext(),"Select child sex",Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER,0,0);
                     toast.show();
                     radioGroup.requestFocus();
@@ -120,17 +135,17 @@ public class PatientRegister_3 extends AppCompatActivity {
                 String Weight = mWeight.getText().toString();
 
                 if (TextUtils.isEmpty(ChildName)){
-                    Toast toast = Toast.makeText(PatientRegister_3.this,"Enter child name",Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(getContext(),"Enter child name",Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER,0,0);
                     toast.show();
                     mChildName.requestFocus();
                 }else if (TextUtils.isEmpty(ChildDOB)){
-                    Toast toast = Toast.makeText(PatientRegister_3.this,"Enter child birth date",Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(getContext(),"Enter child birth date",Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER,0,0);
                     toast.show();
                     mChildDOB.requestFocus();
                 }else if (TextUtils.isEmpty(Weight)){
-                    Toast toast = Toast.makeText(PatientRegister_3.this,"Enter weight",Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(getContext(),"Enter weight",Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER,0,0);
                     toast.show();
                     mWeight.requestFocus();
@@ -154,28 +169,23 @@ public class PatientRegister_3 extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<DocumentReference> task) {
                                     if (task.isSuccessful()){
                                         pd.dismiss();
-                                        Toast.makeText(PatientRegister_3.this, "Upload", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(PatientRegister_3.this, PatientMainActivity.class));
-                                        finish();
+                                        Toast.makeText(getContext(), "Upload", Toast.LENGTH_SHORT).show();
+                                        Fragment fragment = new PatientHomeFragment();
+                                        getFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).commit();
                                     }
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(PatientRegister_3.this, "Server Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Server Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
             }
         });
 
+        return view;
     }
 
-    private void findIds() {
-        radioGroup = findViewById(R.id.radioGroup);
-        mBtnNext = findViewById(R.id.btnNext);
-        mChildDOB = findViewById(R.id.childDOB);
-        mChildName = findViewById(R.id.childName);
-        mWeight = findViewById(R.id.childWeight);
-    }
+
 }
