@@ -5,49 +5,63 @@ public class ChildData {
     String ChildDOB;
     String ChildGender;
     String FileNumber;
+    String ParentId;
     Long TimeStamp;
 
     public ChildData() {
     }
 
-    public ChildData(String childName, String childDOB, String childGender, String fileNumber, Long timeStamp) {
+    public ChildData(String childName, String childDOB, String childGender, String fileNumber, Long timeStamp, String parentId) {
         ChildName = childName;
         ChildDOB = childDOB;
         ChildGender = childGender;
         FileNumber = fileNumber;
+        ParentId = parentId;
         TimeStamp = timeStamp;
+    }
+
+    public String getParentId() {
+        return ParentId;
+    }
+
+    public void setParentId(String parentId) {
+        ParentId = parentId;
     }
 
     public String getChildName() {
         return ChildName;
     }
 
-    public void setChildName(String childName) {
+    public String setChildName(String childName) {
         ChildName = childName;
+        return childName;
     }
 
     public String getChildDOB() {
         return ChildDOB;
     }
 
-    public void setChildDOB(String childDOB) {
+    public String setChildDOB(String childDOB) {
         ChildDOB = childDOB;
+        return childDOB;
     }
 
     public String getChildGender() {
         return ChildGender;
     }
 
-    public void setChildGender(String childGender) {
+    public String setChildGender(String childGender) {
         ChildGender = childGender;
+        return childGender;
     }
 
     public String getFileNumber() {
         return FileNumber;
     }
 
-    public void setFileNumber(String fileNumber) {
+    public String setFileNumber(String fileNumber) {
         FileNumber = fileNumber;
+        return fileNumber;
     }
 
     public Long getTimeStamp() {

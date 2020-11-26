@@ -12,8 +12,32 @@
         android:layout_height="wrap_content"
         android:padding="10dp">
 
+        <RelativeLayout
+            android:id="@+id/layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/childBoyImg"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:visibility="gone"
+                android:src="@drawable/child_img"/>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/childGirlImg"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:visibility="gone"
+                android:src="@drawable/child_girl_img"/>
+
+        </RelativeLayout>
+
         <TextView
             android:id="@+id/childName"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/layout"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/purple_500"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ajinkya Shinde"
@@ -21,6 +45,8 @@
             android:textStyle="bold"/>
         <TextView
             android:id="@+id/date"
+            android:layout_toRightOf="@id/layout"
+            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="14 Nov 2020"
@@ -29,6 +55,8 @@
 
         <TextView
             android:id="@+id/problem"
+            android:layout_toRightOf="@id/layout"
+            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Testing propose..."

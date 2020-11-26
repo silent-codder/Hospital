@@ -5,15 +5,25 @@ public class Appointment {
     String ChildName;
     String Problem;
     String UserId;
+    String Gender;
 
     public Appointment() {
     }
 
-    public Appointment(String appointmentDate, String childName, String problem, String userId) {
+    public Appointment(String appointmentDate, String childName, String problem, String userId,String gender) {
         AppointmentDate = appointmentDate;
         ChildName = childName;
         Problem = problem;
         UserId = userId;
+        Gender = gender;
+    }
+
+    public String getGender() {
+        return Gender;
+    }
+
+    public void setGender(String gender) {
+        Gender = gender;
     }
 
     public String getAppointmentDate() {

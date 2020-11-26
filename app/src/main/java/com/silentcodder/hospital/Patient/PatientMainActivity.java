@@ -11,19 +11,23 @@ import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.silentcodder.hospital.Counter.CounterMainActivity;
-import com.silentcodder.hospital.Counter.Fragments.CounterHomeFragment;
-import com.silentcodder.hospital.Counter.Fragments.CounterProfileFragment;
-import com.silentcodder.hospital.Counter.Fragments.CounterSearchFragment;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.silentcodder.hospital.MainActivity;
 import com.silentcodder.hospital.Patient.Fragments.PatientHistoryFragment;
 import com.silentcodder.hospital.Patient.Fragments.PatientHomeFragment;
 import com.silentcodder.hospital.Patient.Fragments.PatientProfileFragment;
 import com.silentcodder.hospital.R;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PatientMainActivity extends AppCompatActivity {
 
@@ -32,6 +36,8 @@ public class PatientMainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
 
     Fragment selectFragment;
+    FirebaseFirestore firebaseFirestore;
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +49,40 @@ public class PatientMainActivity extends AppCompatActivity {
 
         nav = findViewById(R.id.navMenu);
         drawerLayout = findViewById(R.id.drawer);
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
+
+        String UserId = firebaseAuth.getCurrentUser().getUid();
+
 
         toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.Open,R.string.Close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+        toggle.getDrawerArrowDrawable().setColor(getColor(R.color.white));
+
+
+        firebaseFirestore.collection("Parent-Details").document(UserId)
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                String FirstName = documentSnapshot.getString("First-Name");
+                String LastName = documentSnapshot.getString("Last-Name");
+                String MobileNumber = documentSnapshot.getString("Mobile-Number");
+                String ProfileUrl = documentSnapshot.getString("ProfileImgUrl");
+
+                View view = nav.inflateHeaderView(R.layout.counter_header);
+                CircleImageView profile = view.findViewById(R.id.counterProfile);
+                TextView name = view.findViewById(R.id.firstName);
+                TextView mobileNumber = view.findViewById(R.id.mobileNumber);
+                name.setText(FirstName + " " + LastName);
+                mobileNumber.setText(MobileNumber);
+                Picasso.get().load(ProfileUrl).into(profile);
+
+
+            }
+        });
+
 
 
         nav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -68,7 +104,7 @@ public class PatientMainActivity extends AppCompatActivity {
                         selectFragment = new PatientProfileFragment();
                         break;
                     case R.id.nav_patient_logout :
-                        logOut();
+                        Toast.makeText(PatientMainActivity.this, "Working on it !!", Toast.LENGTH_SHORT).show();
                         break;
                 }
 

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="320dp"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center"
     app:cardCornerRadius="20dp"
-    android:layout_gravity="center">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -23,55 +23,61 @@
             android:layout_below="@id/btnCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Book Appointment"
+            android:text="Edit Profile"
             android:textStyle="bold"
             android:textSize="20sp"
             android:textColor="@color/purple_500"
             android:layout_centerHorizontal="true"/>
 
-<!--        <EditText-->
-<!--            android:id="@+id/childName"-->
-<!--            android:layout_width="250dp"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:padding="10dp"-->
-<!--            android:hint="Child Name"-->
-<!--            android:layout_marginTop="20dp"-->
-<!--            android:background="@drawable/edit_txt_bg"-->
-<!--            android:layout_below="@+id/text"-->
-<!--            android:layout_centerHorizontal="true"/>-->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/text"
+            android:src="@drawable/child_img"/>
+
+       <TextView
+           android:id="@+id/selectImg"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Choose profile image"
+           android:textStyle="normal"
+           android:textSize="17sp"
+           android:drawableLeft="@drawable/ic_camera"
+           android:layout_centerHorizontal="true"
+           android:layout_below="@id/img"/>
+
         <EditText
-            android:id="@+id/childProblem"
-            android:layout_width="250dp"
-            android:layout_height="100dp"
-            android:padding="10dp"
-            android:gravity="start"
-            android:hint="Write problem (Optional)"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/edit_txt_bg"
-            android:layout_below="@+id/text"
-            android:layout_centerHorizontal="true"/>
-        <EditText
-            android:id="@+id/appointmentDate"
+            android:id="@+id/firstName"
             android:layout_width="250dp"
             android:layout_height="50dp"
             android:padding="10dp"
-            android:hint="Appointment Date"
-            android:layout_marginTop="10dp"
-            android:drawableRight="@drawable/ic_calendar"
-            android:background="@drawable/edit_txt_bg"
-            android:layout_below="@+id/childProblem"
+            android:hint="First Name"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/selectImg"
             android:layout_centerHorizontal="true"/>
 
+        <EditText
+            android:id="@+id/lastName"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:hint="Last Name"
+            android:layout_below="@+id/firstName"
+            android:layout_centerHorizontal="true"/>
+
+
         <Button
-            android:id="@+id/btnBookAppointment"
+            android:id="@+id/btnUpdateProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Book Appointment"
+            android:text="Update Profile"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:layout_marginTop="15dp"
             android:textAllCaps="false"
-            android:layout_below="@id/appointmentDate"
+            android:layout_below="@id/lastName"
             android:layout_centerHorizontal="true"/>
 
 

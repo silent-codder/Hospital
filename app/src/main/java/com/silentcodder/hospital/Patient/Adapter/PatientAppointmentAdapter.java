@@ -13,6 +13,8 @@ import com.silentcodder.hospital.R;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class PatientAppointmentAdapter extends RecyclerView.Adapter<PatientAppointmentAdapter.ViewHolder> {
 
     public List<Appointment> appointments;
@@ -34,6 +36,13 @@ public class PatientAppointmentAdapter extends RecyclerView.Adapter<PatientAppoi
         String ChildName  = appointments.get(position).getChildName();
         String Date = appointments.get(position).getAppointmentDate();
         String Problem = appointments.get(position).getProblem();
+        String Gender = appointments.get(position).getGender();
+
+        if (Gender.equals("Boy") || Gender.equals("Other")){
+            holder.boy.setVisibility(View.VISIBLE);
+        }else if (Gender.equals("Girl")){
+            holder.girl.setVisibility(View.VISIBLE);
+        }
 
         holder.mChildName.setText(ChildName);
         holder.mDate.setText(Date);
@@ -47,11 +56,14 @@ public class PatientAppointmentAdapter extends RecyclerView.Adapter<PatientAppoi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView mChildName,mDate,mProblem;
+        CircleImageView boy,girl;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mChildName = itemView.findViewById(R.id.childName);
             mDate = itemView.findViewById(R.id.date);
             mProblem = itemView.findViewById(R.id.problem);
+            boy = itemView.findViewById(R.id.childBoyImg);
+            girl = itemView.findViewById(R.id.childGirlImg);
         }
     }
 }

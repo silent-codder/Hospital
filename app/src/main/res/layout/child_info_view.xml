@@ -12,11 +12,25 @@
         android:layout_height="wrap_content"
         android:padding="10dp">
 
-       <de.hdodenhof.circleimageview.CircleImageView
-           android:id="@+id/childImg"
-           android:layout_width="120dp"
-           android:layout_height="120dp"
-           android:src="@drawable/child_img"/>
+      <RelativeLayout
+          android:id="@+id/layout"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content">
+
+          <de.hdodenhof.circleimageview.CircleImageView
+              android:id="@+id/childImg"
+              android:layout_width="120dp"
+              android:layout_height="120dp"
+              android:visibility="gone"
+              android:src="@drawable/child_img"/>
+          <de.hdodenhof.circleimageview.CircleImageView
+              android:id="@+id/childGirlImg"
+              android:layout_width="120dp"
+              android:layout_height="120dp"
+              android:visibility="gone"
+              android:src="@drawable/child_girl_img"/>
+
+      </RelativeLayout>
 
         <TextView
             android:id="@+id/childName"
@@ -25,7 +39,7 @@
             android:text="Ajinkya"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_below="@id/childImg"
+            android:layout_below="@id/layout"
             android:gravity="center"/>
 
         <TextView
@@ -33,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="File Number : "
-            android:layout_toRightOf="@id/childImg"
+            android:layout_toRightOf="@id/layout"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="10dp"/>
         <TextView
@@ -51,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Birth Date : "
-            android:layout_toRightOf="@id/childImg"
+            android:layout_toRightOf="@id/layout"
             android:layout_below="@id/file"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"/>
@@ -71,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Gender : "
-            android:layout_toRightOf="@id/childImg"
+            android:layout_toRightOf="@id/layout"
             android:layout_below="@id/birth"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"/>
@@ -92,9 +106,19 @@
             android:layout_height="wrap_content"
             android:text="Open File"
             android:textAllCaps="false"
-            android:layout_marginTop="5dp"
+            android:layout_below="@id/childName"
             android:textStyle="bold"
-            android:layout_below="@id/gender"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentRight="false"/>
+        <Button
+            android:id="@+id/btnBookAppointment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Get Appointment"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/childName"
             android:layout_alignParentRight="true"/>
 
     </RelativeLayout>

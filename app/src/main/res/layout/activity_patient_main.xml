@@ -15,9 +15,11 @@
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#0A747474"
+            android:background="@color/purple_700"
             app:title="Smart Hospital"
-            app:titleTextColor="@color/purple_500"
+            app:subtitle="Patient"
+            app:subtitleTextColor="@color/white"
+            app:titleTextColor="@color/white"
             android:id="@+id/toolbar"/>
         <FrameLayout
             android:layout_width="match_parent"
@@ -31,7 +33,6 @@
         android:layout_height="match_parent"
         android:id="@+id/navMenu"
         app:menu="@menu/patient_nav_menu"
-        app:headerLayout="@layout/patient_header"
         android:layout_gravity="start"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -19,7 +19,7 @@
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
         android:textSize="30sp"
-        android:textColor="#515151"
+        android:textColor="@color/purple_700"
         android:text="Appointments"/>
 
     <androidx.recyclerview.widget.RecyclerView

@@ -3,14 +3,153 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="56dp"
     tools:context=".Patient.Fragments.PatientProfileFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Profile"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="40sp"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_img"/>
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:padding="20dp">
+
+       <de.hdodenhof.circleimageview.CircleImageView
+           android:layout_marginTop="20dp"
+           android:id="@+id/counterProfil"
+           android:layout_width="150dp"
+           android:layout_height="150dp"
+           app:civ_border_width="1dp"
+           android:src="@drawable/patient"
+           android:layout_centerHorizontal="true"/>
+       <de.hdodenhof.circleimageview.CircleImageView
+           android:layout_marginTop="20dp"
+           android:id="@+id/counterProfile"
+           android:layout_width="150dp"
+           android:layout_height="150dp"
+           app:civ_border_width="1dp"
+           android:src="@drawable/patient"
+           android:layout_centerHorizontal="true"/>
+      <androidx.cardview.widget.CardView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          app:cardCornerRadius="15dp"
+          android:layout_below="@id/counterProfile"
+          android:id="@+id/cardView">
+
+         <RelativeLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:padding="10dp">
+
+             <TextView
+                 android:id="@+id/firstName"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="User Name"
+                 android:textColor="@color/teal_700"
+                 android:layout_centerHorizontal="true"
+                 android:textSize="20sp"
+                 android:textStyle="bold"/>
+             <TextView
+                 android:id="@+id/mobileNumber"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="+911234567899"
+                 android:textColor="@color/teal_700"
+                 android:layout_below="@id/firstName"
+                 android:layout_centerHorizontal="true"
+                 android:textStyle="bold"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:gravity="center"
+                android:layout_below="@id/mobileNumber"
+                android:id="@+id/linear">
+
+                <LinearLayout
+                    android:id="@+id/linear1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/childCount"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@color/teal_700"
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="Child"
+                        android:gravity="center"
+                        android:textColor="@color/teal_700"
+                        android:layout_below="@id/childCount"
+                        android:textStyle="bold"
+                        android:textSize="18sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@id/linear1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/appointmentCount"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@color/teal_700"
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:layout_width="122dp"
+                        android:layout_height="wrap_content"
+                        android:text="Appointments"
+                        android:gravity="center"
+                        android:textColor="@color/teal_700"
+                        android:layout_below="@id/appointmentCount"
+                        android:textStyle="bold"
+                        android:textSize="18sp"/>
+
+                </LinearLayout>
+
+
+
+            </RelativeLayout>
+            <Button
+                android:id="@+id/editProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Edit"
+                android:layout_below="@id/linear"
+                android:layout_alignParentRight="true"/>
+
+         </RelativeLayout>
+
+
+      </androidx.cardview.widget.CardView>
+
+   </RelativeLayout>
+
 
 </RelativeLayout>
