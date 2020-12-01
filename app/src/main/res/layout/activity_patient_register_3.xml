@@ -11,15 +11,7 @@
         android:layout_height="match_parent"
         android:src="@drawable/bg_img"
         android:scaleType="centerCrop"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Child Details"
-        android:textStyle="bold"
-        android:textColor="@color/purple_500"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="140dp"
-        android:textSize="40sp"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -38,13 +30,26 @@
                 android:gravity="center">
 
 
+                <TextView
+                    android:id="@+id/text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Child Details"
+                    android:textStyle="bold"
+                    android:textColor="@color/purple_500"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="30sp"/>
+
+
                 <EditText
                     android:id="@+id/childName"
                     android:layout_width="250dp"
                     android:layout_height="50dp"
                     android:hint="Child First Name"
+                    android:layout_below="@id/text"
                     android:layout_centerHorizontal="true"
                     android:padding="10dp"
+                    android:layout_marginTop="20dp"
                     android:background="@drawable/edit_txt_bg"/>
                 <EditText
                     android:id="@+id/childDOB"

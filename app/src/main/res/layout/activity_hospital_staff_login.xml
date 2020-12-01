@@ -11,16 +11,7 @@
         android:layout_height="match_parent"
         android:src="@drawable/bg_img"
         android:scaleType="centerCrop"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hospital Staff \nLogin"
-        android:textStyle="bold"
-        android:textColor="@color/purple_500"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="130dp"
-        android:gravity="center"
-        android:textSize="40sp"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -38,69 +29,97 @@
                 android:padding="20dp"
                 android:gravity="center">
 
+                <TextView
+                    android:id="@+id/text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Login"
+                    android:textStyle="bold"
+                    android:textColor="@color/purple_500"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="30sp"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="145dp"
+                    android:layout_below="@id/text"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/layout">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:src="@drawable/doctor"
+                        android:visibility="gone"
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/doctorImg"/>
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:src="@drawable/counter"
+                        android:visibility="gone"
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/counterImg"/>
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="140dp"
+                        android:layout_height="140dp"
+                        android:src="@drawable/medical"
+                        android:visibility="gone"
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/medicalImg"/>
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/purple_500"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    android:textSize="20sp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/layout"
+                    android:id="@+id/staff"/>
+
                 <EditText
+                    android:layout_below="@id/staff"
                     android:id="@+id/email"
                     android:layout_width="250dp"
                     android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
                     android:hint="Email"
-                    android:gravity="center"
+                    android:inputType="textEmailAddress"
+                    android:background="@drawable/edit_txt_bg"
+                    android:gravity="start"
                     android:layout_centerHorizontal="true"
-                    android:padding="10dp"
-                    android:background="@drawable/edit_txt_bg"/>
+                    android:padding="15dp"/>
                 <EditText
                     android:id="@+id/password"
                     android:layout_width="250dp"
                     android:layout_height="50dp"
+                    android:background="@drawable/edit_txt_bg"
                     android:hint="Password"
+                    android:inputType="numberDecimal"
                     android:layout_below="@id/email"
                     android:layout_marginTop="10dp"
-                    android:gravity="center"
+                    android:gravity="start"
                     android:layout_centerHorizontal="true"
-                    android:padding="10dp"
-                    android:background="@drawable/edit_txt_bg"/>
+                    android:padding="10dp"/>
 
                 <Button
                     android:id="@+id/btnSubmit"
+                    android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/linear"
+                    android:layout_below="@id/password"
                     android:text="Submit"
                     android:textColor="@color/white"
                     android:layout_centerHorizontal="true"
                     android:textStyle="bold" />
 
-                <LinearLayout
-                    android:id="@+id/linear"
-                    android:layout_below="@id/password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
 
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <RadioButton
-                            android:id="@+id/doctor"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Doctor"/>
-                        <RadioButton
-                            android:id="@+id/counter"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Counter"/>
-                        <RadioButton
-                            android:id="@+id/medical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Medical"/>
-
-                    </RadioGroup>
-
-                </LinearLayout>
 
             </RelativeLayout>
 

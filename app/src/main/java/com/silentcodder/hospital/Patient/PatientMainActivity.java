@@ -62,6 +62,8 @@ public class PatientMainActivity extends AppCompatActivity {
         toggle.getDrawerArrowDrawable().setColor(getColor(R.color.white));
 
 
+        //Drawer
+
         firebaseFirestore.collection("Parent-Details").document(UserId)
                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -104,7 +106,8 @@ public class PatientMainActivity extends AppCompatActivity {
                         selectFragment = new PatientProfileFragment();
                         break;
                     case R.id.nav_patient_logout :
-                        Toast.makeText(PatientMainActivity.this, "Working on it !!", Toast.LENGTH_SHORT).show();
+                        logOut();
+                        Toast.makeText(PatientMainActivity.this, "Log out Successfully", Toast.LENGTH_SHORT).show();
                         break;
                 }
 

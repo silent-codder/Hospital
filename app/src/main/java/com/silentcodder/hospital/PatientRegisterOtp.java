@@ -72,6 +72,7 @@ public class PatientRegisterOtp extends AppCompatActivity {
                             Intent intent = new Intent(PatientRegisterOtp.this, PatientRegister_2.class);
                             intent.putExtra("Mobile",mPhoneNumber);
                             startActivity(intent);
+                            finish();
                         } else {
                             Toast.makeText(PatientRegisterOtp.this, "Error...", Toast.LENGTH_SHORT).show();
                         }

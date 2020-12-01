@@ -16,16 +16,21 @@
        <androidx.appcompat.widget.Toolbar
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:background="#0A747474"
+           android:background="@color/purple_700"
            app:title="Smart Hospital"
-           app:titleTextColor="@color/purple_500"
+           app:titleTextColor="@color/white"
+           app:subtitleTextColor="@color/white"
+           app:subtitle="Counter"
            android:id="@+id/toolbar"/>
        <FrameLayout
            android:layout_width="match_parent"
            android:layout_height="match_parent"
            android:id="@+id/fragment_container"/>
 
+
+
    </RelativeLayout>
+
 
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
@@ -34,4 +39,5 @@
         app:menu="@menu/counter_nav_menu"
         app:headerLayout="@layout/counter_header"
         android:layout_gravity="start"/>
+
 </androidx.drawerlayout.widget.DrawerLayout>

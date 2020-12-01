@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -27,7 +28,6 @@ public class CounterMainActivity extends AppCompatActivity {
     NavigationView nav;
     ActionBarDrawerToggle toggle;
     DrawerLayout drawerLayout;
-
     Fragment selectFragment;
 
     @Override
@@ -41,9 +41,11 @@ public class CounterMainActivity extends AppCompatActivity {
         nav = findViewById(R.id.navMenu);
         drawerLayout = findViewById(R.id.drawer);
 
+
         toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.Open,R.string.Close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+        toggle.getDrawerArrowDrawable().setColor(getColor(R.color.white));
 
 
         nav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -53,6 +55,7 @@ public class CounterMainActivity extends AppCompatActivity {
                 removeColor(nav);
 
                 item.setChecked(true);
+
                 
                 switch (item.getItemId()){
                     case R.id.nav_counter_home :
@@ -65,7 +68,8 @@ public class CounterMainActivity extends AppCompatActivity {
                         selectFragment = new CounterProfileFragment();
                         break;
                     case R.id.nav_counter_logout :
-                        logOut();
+                        Toast.makeText(CounterMainActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                       // logOut();
                         break;
                 }
 

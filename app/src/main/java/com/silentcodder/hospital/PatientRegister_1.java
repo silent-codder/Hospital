@@ -36,6 +36,7 @@ public class PatientRegister_1 extends AppCompatActivity {
                 Intent intent = new Intent(PatientRegister_1.this,PatientRegisterOtp.class);
                 intent.putExtra("Mobile",mCpp.getFullNumberWithPlus().replace(" ",""));
                 startActivity(intent);
+                finish();
             }
         });
     }
