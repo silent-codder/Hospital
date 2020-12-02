@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -37,6 +38,9 @@ public class AppointmentsFragment extends Fragment {
     FirebaseFirestore firebaseFirestore;
     FirebaseAuth firebaseAuth;
     String UserId;
+    ImageView imageView;
+    TextView textView;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     RecyclerView recyclerView;
     List<Appointment> appointment;
@@ -47,13 +51,35 @@ public class AppointmentsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_appointments, container, false);
 
+         imageView = view.findViewById(R.id.noData);
+         textView = view.findViewById(R.id.noDataText);
+
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
         recyclerView = view.findViewById(R.id.recycleView);
         UserId = firebaseAuth.getCurrentUser().getUid();
 
-        //Recycle view
+        swipeRefreshLayout = view.findViewById(R.id.refresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refresh();
+            }
+        });
 
+        //recycle function
+        loadData();
+
+        return view;
+    }
+
+    private void refresh() {
+        loadData();
+    }
+
+    private void loadData() {
+        //Recycle view
+        swipeRefreshLayout.setRefreshing(false);
         appointment = new ArrayList<>();
         counterAppointmentAdapter = new CounterAppointmentAdapter(appointment);
 
@@ -66,32 +92,27 @@ public class AppointmentsFragment extends Fragment {
         String dateString = (String) DateFormat
                 .format("dd MMM yyyy",new Date(date)).toString();
 
-        Toast.makeText(getContext(), dateString, Toast.LENGTH_LONG).show();
-
-        Query query = appointmentRef.whereLessThanOrEqualTo("AppointmentDate",dateString)
-                .orderBy("AppointmentDate",Query.Direction.ASCENDING).limit(100);
+        Query query = appointmentRef.whereGreaterThanOrEqualTo("AppointmentDate",dateString)
+                .orderBy("AppointmentDate",Query.Direction.ASCENDING);
 
         query.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (value.isEmpty()){
-                    ImageView imageView = view.findViewById(R.id.noData);
-                    TextView textView = view.findViewById(R.id.noDataText);
                     imageView.setVisibility(View.VISIBLE);
                     textView.setVisibility(View.VISIBLE);
 
                 }
                 for (DocumentChange doc : value.getDocumentChanges()){
                     if (doc.getType() == DocumentChange.Type.ADDED){
-                        Appointment mAppointment = doc.getDocument().toObject(Appointment.class);
+                        String AppointmentId = doc.getDocument().getId();
+                        Appointment mAppointment = doc.getDocument().toObject(Appointment.class).withId(AppointmentId);
                         appointment.add(mAppointment);
                         counterAppointmentAdapter.notifyDataSetChanged();
                     }
                 }
             }
         });
-
-        return view;
     }
 
 }

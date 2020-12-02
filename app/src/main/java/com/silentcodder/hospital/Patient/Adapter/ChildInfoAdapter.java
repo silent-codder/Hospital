@@ -36,6 +36,9 @@ import com.silentcodder.hospital.Patient.PatientChildFileFragment;
 import com.silentcodder.hospital.PatientLogin;
 import com.silentcodder.hospital.R;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -189,6 +192,7 @@ public class ChildInfoAdapter extends RecyclerView.Adapter<ChildInfoAdapter.View
                         String ApmProblem = mChildProblem.getText().toString();
                         String ApmDate = mDate.getText().toString();
 
+
                         if (TextUtils.isEmpty(ApmDate)){
                             Toast.makeText(context, "Select Appointment date", Toast.LENGTH_SHORT).show();
                         }else {
@@ -197,6 +201,7 @@ public class ChildInfoAdapter extends RecyclerView.Adapter<ChildInfoAdapter.View
                             map.put("Problem",ApmProblem);
                             map.put("AppointmentDate",ApmDate);
                             map.put("Gender",ChildGender);
+                            map.put("FileNumber",FileNumber);
                             map.put("TimeStamp",System.currentTimeMillis());
                             map.put("UserId",UserId);
 
@@ -206,7 +211,7 @@ public class ChildInfoAdapter extends RecyclerView.Adapter<ChildInfoAdapter.View
                                         public void onComplete(@NonNull Task<DocumentReference> task) {
                                             if (task.isSuccessful()){
                                                 pd.dismiss();
-                                                Toast.makeText(context, "Get Appointment", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(context, "Appointment booked", Toast.LENGTH_SHORT).show();
                                                 dialog.dismiss();
                                             }
                                         }
