@@ -164,19 +164,6 @@ public class ChildInfoAdapter extends RecyclerView.Adapter<ChildInfoAdapter.View
                     }
                 });
 
-                //get child name
-               // EditText mChildName = dialog.findViewById(R.id.childName);
-//                firebaseFirestore.collection("Child-Details").document(UserId)
-//                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                        String ChildName = task.getResult().getString("ChildName");
-//                        mChildName.setText(ChildName);
-//                    }
-//                });
-
-                //get child problem
-
                 EditText mChildProblem = dialog.findViewById(R.id.childProblem);
 
                 Button BtmBookAppointment = dialog.findViewById(R.id.btnBookAppointment);

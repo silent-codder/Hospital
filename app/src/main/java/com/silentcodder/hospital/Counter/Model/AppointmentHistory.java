@@ -1,7 +1,7 @@
 package com.silentcodder.hospital.Counter.Model;
 
 public class AppointmentHistory {
-    String ChildFileNumber,ChildGender,ChildName,ChildProblem;
+    String ChildFileNumber,ChildGender,ChildName,ChildProblem,ChildAppointmentDate;
     String ParentName,ParentAddress,ParentMobile;
     String ID;
 
@@ -9,15 +9,24 @@ public class AppointmentHistory {
     }
 
     public AppointmentHistory(String childFileNumber, String childGender, String childName,
-                              String childProblem, String parentName, String parentAddress, String parentMobile, String ID) {
+                              String childProblem, String childAppointmentDate, String parentName, String parentAddress, String parentMobile, String ID) {
         ChildFileNumber = childFileNumber;
         ChildGender = childGender;
         ChildName = childName;
         ChildProblem = childProblem;
+        ChildAppointmentDate = childAppointmentDate;
         ParentName = parentName;
         ParentAddress = parentAddress;
         ParentMobile = parentMobile;
         this.ID = ID;
+    }
+
+    public String getChildAppointmentDate() {
+        return ChildAppointmentDate;
+    }
+
+    public void setChildAppointmentDate(String childAppointmentDate) {
+        ChildAppointmentDate = childAppointmentDate;
     }
 
     public String getChildFileNumber() {

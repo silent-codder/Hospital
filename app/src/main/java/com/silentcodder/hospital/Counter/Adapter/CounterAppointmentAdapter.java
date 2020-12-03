@@ -1,7 +1,9 @@
 package com.silentcodder.hospital.Counter.Adapter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,9 +42,7 @@ public class CounterAppointmentAdapter extends RecyclerView.Adapter<CounterAppoi
     public List<Appointment> appointments;
     FirebaseFirestore firebaseFirestore;
     Context context;
-
-
-    String ParentFirstName,ParentLastName,ParentMobile,ParentAddress;
+    ProgressDialog pd;
 
     public CounterAppointmentAdapter(List<Appointment> appointments) {
         this.appointments = appointments;
@@ -54,6 +54,7 @@ public class CounterAppointmentAdapter extends RecyclerView.Adapter<CounterAppoi
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.counter_appointment_view,parent,false);
         firebaseFirestore = FirebaseFirestore.getInstance();
         context = parent.getContext();
+        pd = new ProgressDialog(context);
         return new ViewHolder(view);
     }
 
@@ -83,6 +84,9 @@ public class CounterAppointmentAdapter extends RecyclerView.Adapter<CounterAppoi
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
+                pd.setMessage("Forwarding to doctor..");
+                pd.show();
+
                 firebaseFirestore.collection("Parent-Details").document(UserId)
                         .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
@@ -102,6 +106,7 @@ public class CounterAppointmentAdapter extends RecyclerView.Adapter<CounterAppoi
                             map.put("ChildGender",Gender);
                             map.put("ChildProblem",Problem);
                             map.put("ChildFileNumber",FileNumber);
+                            map.put("ChildAppointmentDate",Date);
 
                             firebaseFirestore.collection("Doctor-OPD").add(map)
                                     .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
@@ -110,7 +115,7 @@ public class CounterAppointmentAdapter extends RecyclerView.Adapter<CounterAppoi
                                             if (task.isSuccessful()){
 
                                                 firebaseFirestore.collection("Appointments").document(AppointmentId).delete();
-
+                                                pd.dismiss();
                                                 Toast toast = Toast.makeText(context, "File forward to doctor", Toast.LENGTH_SHORT);
                                                 toast.setGravity(Gravity.CENTER,0,0);
                                                 toast.show();
@@ -122,13 +127,9 @@ public class CounterAppointmentAdapter extends RecyclerView.Adapter<CounterAppoi
                                     Toast.makeText(context, "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             });
-                        }else {
-
                         }
                     }
                 });
-
-
             }
         });
 

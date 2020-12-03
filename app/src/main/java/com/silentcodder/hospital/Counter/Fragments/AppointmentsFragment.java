@@ -1,5 +1,6 @@
 package com.silentcodder.hospital.Counter.Fragments;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,9 +43,10 @@ public class AppointmentsFragment extends Fragment {
     ImageView imageView;
     TextView textView;
     SwipeRefreshLayout swipeRefreshLayout;
+    ProgressDialog pd;
 
     RecyclerView recyclerView;
-    List<Appointment> appointment;
+    List<Appointment> appointments;
     CounterAppointmentAdapter counterAppointmentAdapter;
 
     @Override
@@ -53,6 +56,7 @@ public class AppointmentsFragment extends Fragment {
 
          imageView = view.findViewById(R.id.noData);
          textView = view.findViewById(R.id.noDataText);
+         pd = new ProgressDialog(getContext());
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -75,13 +79,16 @@ public class AppointmentsFragment extends Fragment {
 
     private void refresh() {
         loadData();
+
     }
 
     private void loadData() {
         //Recycle view
+        pd.setMessage("Please wait..");
+        pd.show();
         swipeRefreshLayout.setRefreshing(false);
-        appointment = new ArrayList<>();
-        counterAppointmentAdapter = new CounterAppointmentAdapter(appointment);
+        appointments = new ArrayList<>();
+        counterAppointmentAdapter = new CounterAppointmentAdapter(appointments);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(counterAppointmentAdapter);
@@ -101,18 +108,22 @@ public class AppointmentsFragment extends Fragment {
                 if (value.isEmpty()){
                     imageView.setVisibility(View.VISIBLE);
                     textView.setVisibility(View.VISIBLE);
+                    pd.dismiss();
 
                 }
                 for (DocumentChange doc : value.getDocumentChanges()){
                     if (doc.getType() == DocumentChange.Type.ADDED){
                         String AppointmentId = doc.getDocument().getId();
                         Appointment mAppointment = doc.getDocument().toObject(Appointment.class).withId(AppointmentId);
-                        appointment.add(mAppointment);
+                        appointments.add(mAppointment);
                         counterAppointmentAdapter.notifyDataSetChanged();
+                        pd.dismiss();
                     }
                 }
             }
         });
     }
+
+
 
 }

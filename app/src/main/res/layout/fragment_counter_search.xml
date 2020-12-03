@@ -3,14 +3,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="56dp"
     tools:context=".Counter.Fragments.CounterSearchFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="40sp"
-        android:text="Search" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/bg_img"
+        android:scaleType="centerCrop"/>
+    <EditText
+        android:layout_margin="5dp"
+        android:id="@+id/searchWord"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        android:hint="Search file,mobile number here..."
+        android:inputType="numberDecimal"
+        android:background="@drawable/edit_txt_bg"/>
+    <ImageView
+        android:id="@+id/btnSearch"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:src="@drawable/ic_search"
+        android:layout_alignParentRight="true"
+        android:layout_margin="15dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/btnSearch"
+        android:layout_margin="5dp"/>
 
 </RelativeLayout>
