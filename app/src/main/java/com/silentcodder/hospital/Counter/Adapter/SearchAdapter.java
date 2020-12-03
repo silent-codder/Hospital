@@ -27,12 +27,14 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.counter_appointment_history_view,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.counter_search_view,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+        String ChildName = childData
 
     }
 
@@ -42,14 +44,14 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView mChildName,mDate,mProblem;
+        TextView mChildName,mDate,mFileNumber;
         CircleImageView boy,girl;
         Button mOpenFile;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mChildName = itemView.findViewById(R.id.childName);
             mDate = itemView.findViewById(R.id.date);
-            mProblem = itemView.findViewById(R.id.problem);
+            mFileNumber = itemView.findViewById(R.id.fileNumber);
             boy = itemView.findViewById(R.id.childBoyImg);
             girl = itemView.findViewById(R.id.childGirlImg);
             mOpenFile = itemView.findViewById(R.id.btnFileOpen);
