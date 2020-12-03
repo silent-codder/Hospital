@@ -13,15 +13,22 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.silentcodder.hospital.Counter.Fragments.CounterHomeFragment;
 import com.silentcodder.hospital.Counter.Fragments.CounterProfileFragment;
 import com.silentcodder.hospital.Counter.Fragments.CounterSearchFragment;
 import com.silentcodder.hospital.MainActivity;
 import com.silentcodder.hospital.R;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CounterMainActivity extends AppCompatActivity {
 
@@ -29,7 +36,11 @@ public class CounterMainActivity extends AppCompatActivity {
     ActionBarDrawerToggle toggle;
     DrawerLayout drawerLayout;
     Fragment selectFragment;
+    FirebaseAuth firebaseAuth;
+    FirebaseFirestore firebaseFirestore;
 
+    String UserId;
+    CircleImageView profile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +48,10 @@ public class CounterMainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+        UserId = firebaseAuth.getCurrentUser().getUid();
 
         nav = findViewById(R.id.navMenu);
         drawerLayout = findViewById(R.id.drawer);
@@ -46,6 +61,25 @@ public class CounterMainActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         toggle.getDrawerArrowDrawable().setColor(getColor(R.color.white));
+
+        //Drawer
+
+        firebaseFirestore.collection("Staff-Details").document(UserId)
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                String FirstName = documentSnapshot.getString("FirstName");
+                String LastName = documentSnapshot.getString("LastName");
+                String ProfileUrl = documentSnapshot.getString("ProfileImgUrl");
+
+                View view = nav.inflateHeaderView(R.layout.counter_header);
+                profile = view.findViewById(R.id.counterProfile);
+                Picasso.get().load(ProfileUrl).into(profile);
+                TextView name = view.findViewById(R.id.firstName);
+                TextView mobileNumber = view.findViewById(R.id.mobileNumber);
+                name.setText(FirstName + " " + LastName);
+            }
+        });
 
 
         nav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {

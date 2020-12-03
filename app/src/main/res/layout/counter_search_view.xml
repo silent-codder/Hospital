@@ -43,34 +43,81 @@
             android:text="Ajinkya Shinde"
             android:textSize="18sp"
             android:textStyle="bold"/>
+       <TextView
+           android:id="@+id/parent"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Parent Name  :"
+           android:layout_below="@id/childName"
+           android:layout_toRightOf="@id/layout"
+           android:layout_marginLeft="10dp"
+           android:textStyle="normal"/>
         <TextView
-            android:id="@+id/date"
-            android:layout_toRightOf="@id/layout"
-            android:layout_marginLeft="10dp"
+            android:id="@+id/parentName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="14 Nov 2020"
+            android:text=""
             android:layout_below="@id/childName"
+            android:layout_toRightOf="@id/parent"
+            android:layout_marginLeft="10dp"
             android:textStyle="bold"/>
-
+        <TextView
+            android:id="@+id/dob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Child DOB :"
+            android:layout_below="@id/parent"
+            android:layout_toRightOf="@id/layout"
+            android:layout_marginLeft="10dp"
+            android:textStyle="normal"/>
+        <TextView
+            android:id="@+id/childDOB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_below="@id/parent"
+            android:layout_toRightOf="@id/dob"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/file"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="File Number :"
+            android:layout_below="@id/dob"
+            android:layout_toRightOf="@id/layout"
+            android:layout_marginLeft="10dp"
+            android:textStyle="normal"/>
         <TextView
             android:id="@+id/fileNumber"
-            android:layout_toRightOf="@id/layout"
-            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="File Number"
-            android:layout_below="@+id/date"
-            android:textSize="16sp"/>
+            android:text=""
+            android:layout_below="@id/dob"
+            android:layout_toRightOf="@id/file"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/btnBookAppointment"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Get Appointment"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:layout_below="@id/layout"/>
+
         <Button
             android:id="@+id/btnFileOpen"
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Open File"
-            android:layout_below="@id/fileNumber"
-            android:layout_alignParentRight="true"
+            android:text="Show File"
             android:textStyle="bold"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/layout"/>
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

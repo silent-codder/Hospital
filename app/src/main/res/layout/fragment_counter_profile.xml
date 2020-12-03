@@ -3,16 +3,105 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="56dp"
     tools:context=".Counter.Fragments.CounterProfileFragment">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/bg_img"
+        android:scaleType="centerCrop"/>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="40sp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Profile" />
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Counter Profile"
+            android:textStyle="normal"
+            android:textColor="@color/purple_700"
+            android:textSize="20sp"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_below="@id/text2"
+            android:layout_marginTop="20dp"
+            android:id="@+id/counterProfil"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:civ_border_width="1dp"
+            android:src="@drawable/patient"
+            android:layout_centerHorizontal="true"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/text2"
+            android:id="@+id/counterProfile"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:civ_border_width="1dp"
+            android:src="@drawable/patient"
+            android:layout_centerHorizontal="true"/>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:cardCornerRadius="15dp"
+            android:layout_below="@id/counterProfile"
+            android:id="@+id/cardView">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/firstName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="User Name"
+                    android:textColor="@color/teal_700"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="counter@gmail.com"
+                    android:textColor="@color/teal_700"
+                    android:layout_below="@id/firstName"
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:layout_below="@id/email"
+                    android:id="@+id/linear">
+
+
+                </RelativeLayout>
+                <Button
+                    android:id="@+id/editProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="Edit"
+                    android:layout_below="@id/linear"
+                    android:layout_alignParentRight="true"/>
+
+            </RelativeLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
 
 </RelativeLayout>

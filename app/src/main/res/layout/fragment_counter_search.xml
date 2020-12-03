@@ -15,10 +15,10 @@
         android:layout_margin="5dp"
         android:id="@+id/searchWord"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:padding="10dp"
         android:hint="Search file,mobile number here..."
-        android:inputType="numberDecimal"
+        android:inputType="numberSigned"
         android:background="@drawable/edit_txt_bg"/>
     <ImageView
         android:id="@+id/btnSearch"
@@ -34,5 +34,19 @@
         android:layout_height="match_parent"
         android:layout_below="@id/btnSearch"
         android:layout_margin="5dp"/>
+
+    <TextView
+        android:id="@+id/noDataText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Not found..."
+        android:textStyle="bold"
+        android:layout_below="@id/searchWord"
+        android:visibility="gone"
+        android:layout_marginTop="20dp"
+        android:drawableRight="@drawable/ic_search"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"/>
+
 
 </RelativeLayout>

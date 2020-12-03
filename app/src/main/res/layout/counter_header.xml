@@ -20,7 +20,7 @@
         android:id="@+id/firstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Profile"
+        android:text="Counter"
         android:textColor="@color/purple_500"
         android:layout_below="@id/counterProfile"
         android:layout_centerHorizontal="true"
@@ -35,6 +35,5 @@
         android:layout_below="@id/firstName"
         android:layout_centerHorizontal="true"
         android:textStyle="bold"/>
-
 
 </RelativeLayout>

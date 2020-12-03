@@ -27,8 +27,6 @@
            android:layout_height="match_parent"
            android:id="@+id/fragment_container"/>
 
-
-
    </RelativeLayout>
 
 
@@ -37,7 +35,6 @@
         android:layout_height="match_parent"
         android:id="@+id/navMenu"
         app:menu="@menu/counter_nav_menu"
-        app:headerLayout="@layout/counter_header"
         android:layout_gravity="start"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

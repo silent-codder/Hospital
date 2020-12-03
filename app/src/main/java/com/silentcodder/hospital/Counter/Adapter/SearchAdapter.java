@@ -1,5 +1,6 @@
 package com.silentcodder.hospital.Counter.Adapter;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.silentcodder.hospital.Patient.Model.ChildData;
 import com.silentcodder.hospital.R;
 
@@ -19,7 +24,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder>{
 
     List<ChildData> childData;
-
+    FirebaseFirestore firebaseFirestore;
     public SearchAdapter(List<ChildData> childData) {
         this.childData = childData;
     }
@@ -28,13 +33,42 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.counter_search_view,parent,false);
+        firebaseFirestore = FirebaseFirestore.getInstance();
         return new ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        String ChildName = childData
+        String ChildName = childData.get(position).getChildName();
+        String ChildDob = childData.get(position).getChildDOB();
+        String FileNumber = childData.get(position).getFileNumber();
+        String Gender = childData.get(position).getChildGender();
+        String Id = childData.get(position).getParentId();
+
+        if (Gender.equals("Boy") || Gender.equals("Other")){
+            holder.boy.setVisibility(View.VISIBLE);
+            holder.girl.setVisibility(View.INVISIBLE);
+        }else if (Gender.equals("Girl")){
+            holder.girl.setVisibility(View.VISIBLE);
+            holder.boy.setVisibility(View.INVISIBLE);
+        }
+
+        holder.mChildName.setText(ChildName);
+        holder.mChildDob.setText(ChildDob);
+        holder.mFileNumber.setText(FileNumber);
+
+        firebaseFirestore.collection("Parent-Details").document(Id).get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        String FirstName = task.getResult().getString("First-Name");
+                        String LastName = task.getResult().getString("Last-Name");
+
+                        holder.mParentName.setText(FirstName + " " + LastName);
+                     }
+                });
 
     }
 
@@ -43,18 +77,21 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         return childData.size();
     }
 
+
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView mChildName,mDate,mFileNumber;
+        TextView mChildName,mChildDob,mFileNumber,mParentName;
         CircleImageView boy,girl;
-        Button mOpenFile;
+        Button mOpenFile,mBookAppointment;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mChildName = itemView.findViewById(R.id.childName);
-            mDate = itemView.findViewById(R.id.date);
+            mChildDob = itemView.findViewById(R.id.childDOB);
             mFileNumber = itemView.findViewById(R.id.fileNumber);
+            mParentName = itemView.findViewById(R.id.parentName);
             boy = itemView.findViewById(R.id.childBoyImg);
             girl = itemView.findViewById(R.id.childGirlImg);
             mOpenFile = itemView.findViewById(R.id.btnFileOpen);
+            mBookAppointment = itemView.findViewById(R.id.btnBookAppointment);
         }
     }
 }
