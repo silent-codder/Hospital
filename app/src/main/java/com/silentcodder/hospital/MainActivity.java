@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.silentcodder.hospital.Counter.CounterMainActivity;
+import com.silentcodder.hospital.Doctor.DoctorMainActivity;
 import com.silentcodder.hospital.Patient.PatientMainActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -127,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null){
-            startActivity(new Intent(MainActivity.this, CounterMainActivity.class));
+            startActivity(new Intent(MainActivity.this, DoctorMainActivity.class));
             finish();
         }
     }

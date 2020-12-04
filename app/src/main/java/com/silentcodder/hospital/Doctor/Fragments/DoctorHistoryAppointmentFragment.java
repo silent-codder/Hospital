@@ -1,4 +1,4 @@
-package com.silentcodder.hospital.Counter.Fragments;
+package com.silentcodder.hospital.Doctor.Fragments;
 
 import android.os.Bundle;
 
@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,17 +22,16 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.silentcodder.hospital.Counter.Adapter.CounterAppointmentAdapter;
 import com.silentcodder.hospital.Counter.Adapter.CounterAppointmentHistoryAdapter;
 import com.silentcodder.hospital.Counter.Model.AppointmentHistory;
-import com.silentcodder.hospital.Patient.Model.Appointment;
+import com.silentcodder.hospital.Doctor.Adapter.DoctorHistoryAppointmentAdapter;
 import com.silentcodder.hospital.R;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class AppointmentHistoryFragment extends Fragment {
+
+public class DoctorHistoryAppointmentFragment extends Fragment {
 
     RecyclerView recyclerView;
     FirebaseFirestore firebaseFirestore;
@@ -44,12 +42,11 @@ public class AppointmentHistoryFragment extends Fragment {
     SwipeRefreshLayout swipeRefreshLayout;
 
     List<AppointmentHistory> appointmentHistory;
-    CounterAppointmentHistoryAdapter counterAppointmentHistoryAdapter;
-
+    DoctorHistoryAppointmentAdapter doctorHistoryAppointmentAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_appointment_history, container, false);
+        View view = inflater.inflate(R.layout.fragment_doctor_history_appointment, container, false);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -73,17 +70,16 @@ public class AppointmentHistoryFragment extends Fragment {
     }
 
     private void loadData() {
-        //Recycle view
         swipeRefreshLayout.setRefreshing(false);
         appointmentHistory = new ArrayList<>();
-        counterAppointmentHistoryAdapter = new CounterAppointmentHistoryAdapter(appointmentHistory);
+        doctorHistoryAppointmentAdapter = new DoctorHistoryAppointmentAdapter(appointmentHistory);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(counterAppointmentHistoryAdapter);
+        recyclerView.setAdapter(doctorHistoryAppointmentAdapter);
 
-        CollectionReference appointmentRef = firebaseFirestore.collection("Doctor-OPD");
+        CollectionReference appointmentRef = firebaseFirestore.collection("History-Appointments");
 
-         Query query = appointmentRef.orderBy("TimeStamp",Query.Direction.ASCENDING);
+        Query query = appointmentRef.orderBy("TimeStamp",Query.Direction.ASCENDING);
 
         query.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -97,11 +93,10 @@ public class AppointmentHistoryFragment extends Fragment {
 
                         AppointmentHistory appointmentHistory1 = doc.getDocument().toObject(AppointmentHistory.class);
                         appointmentHistory.add(appointmentHistory1);
-                        counterAppointmentHistoryAdapter.notifyDataSetChanged();
+                        doctorHistoryAppointmentAdapter.notifyDataSetChanged();
                     }
                 }
             }
         });
-
     }
 }

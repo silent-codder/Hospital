@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center"
+    app:cardCornerRadius="10dp"
+    android:layout_alignParentBottom="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Symptoms"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textColor="@color/purple_700"
+            android:layout_centerHorizontal="true"/>
+
+        <EditText
+            android:id="@+id/symptoms"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:maxHeight="300dp"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:gravity="start"
+            android:text="-\n-\n-\n"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/edit_txt_bg"
+            android:layout_below="@+id/text"/>
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Or"
+            android:layout_below="@id/symptoms"
+            android:layout_centerHorizontal="true"/>
+        <Button
+            android:id="@+id/btnAddImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add image"
+            android:drawableLeft="@drawable/ic_camera"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:layout_below="@+id/text2"
+            android:layout_centerHorizontal="true"/>
+
+        <Button
+            android:id="@+id/btnDone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Done"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:layout_below="@id/btnAddImage"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

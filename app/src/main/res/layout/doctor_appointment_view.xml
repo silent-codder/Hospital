@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="1dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <RelativeLayout
+            android:id="@+id/layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/childBoyImg"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:visibility="gone"
+                android:src="@drawable/child_img"/>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/childGirlImg"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:visibility="gone"
+                android:src="@drawable/child_girl_img"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/childName"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/layout"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/purple_500"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ajinkya Shinde"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/date"
+            android:layout_toRightOf="@id/layout"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="14 Nov 2020"
+            android:layout_below="@id/childName"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/problem"
+            android:layout_toRightOf="@id/layout"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Testing propose..."
+            android:layout_below="@+id/date"
+            android:textSize="16sp"/>
+        <Button
+            android:id="@+id/btnFileOpen"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Open File"
+            android:layout_below="@id/problem"
+            android:textStyle="bold"
+            android:textAllCaps="false"/>
+        <Switch
+            android:id="@+id/btnSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Switch to Done\nAppointment"
+            android:gravity="center"
+            android:layout_below="@id/problem"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="35dp"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

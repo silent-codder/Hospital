@@ -23,6 +23,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.silentcodder.hospital.Counter.CounterMainActivity;
+import com.silentcodder.hospital.Doctor.DoctorMainActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -126,9 +127,8 @@ public class HospitalStaffLogin extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             pd.dismiss();
-                            Toast.makeText(HospitalStaffLogin.this, "Doctor", Toast.LENGTH_SHORT).show();
-//                            Intent intent = new Intent(HospitalStaffLogin.this,CounterMainActivity.class);
-//                            startActivity(intent);
+                            Intent intent = new Intent(HospitalStaffLogin.this, DoctorMainActivity.class);
+                            startActivity(intent);
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {

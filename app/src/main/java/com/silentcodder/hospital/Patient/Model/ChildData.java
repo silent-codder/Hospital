@@ -24,8 +24,9 @@ public class ChildData {
         return ParentId;
     }
 
-    public void setParentId(String parentId) {
+    public String setParentId(String parentId) {
         ParentId = parentId;
+        return parentId;
     }
 
     public String getChildName() {

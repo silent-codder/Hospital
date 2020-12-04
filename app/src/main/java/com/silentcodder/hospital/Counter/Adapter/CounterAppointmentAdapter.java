@@ -107,6 +107,7 @@ public class CounterAppointmentAdapter extends RecyclerView.Adapter<CounterAppoi
                             map.put("ChildProblem",Problem);
                             map.put("ChildFileNumber",FileNumber);
                             map.put("ChildAppointmentDate",Date);
+                            map.put("TimeStamp",System.currentTimeMillis());
 
                             firebaseFirestore.collection("Doctor-OPD").add(map)
                                     .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {

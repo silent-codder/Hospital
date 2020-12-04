@@ -1,6 +1,8 @@
 package com.silentcodder.hospital.Counter.Model;
 
-public class AppointmentHistory {
+import com.silentcodder.hospital.Doctor.Model.AppointmentHistoryId;
+
+public class AppointmentHistory extends com.silentcodder.hospital.Doctor.Model.AppointmentHistoryId {
     String ChildFileNumber,ChildGender,ChildName,ChildProblem,ChildAppointmentDate;
     String ParentName,ParentAddress,ParentMobile;
     String ID;
