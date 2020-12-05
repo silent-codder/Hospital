@@ -78,16 +78,13 @@ public class DoctorMainActivity extends AppCompatActivity {
 
 
                 switch (item.getItemId()){
-                    case R.id.nav_counter_home :
+                    case R.id.nav_patient_home :
                         selectFragment = new DoctorHomeFragment();
                         break;
-                    case R.id.nav_counter_search :
+                    case R.id.nav_patient_hitory :
                         selectFragment = new DoctorHistoryAppointmentFragment();
                         break;
-                    case R.id.nav_counter_profile :
-                        selectFragment = new DoctorProfileFragment();
-                        break;
-                    case R.id.nav_counter_logout :
+                    case R.id.nav_patient_logout :
                         Toast.makeText(DoctorMainActivity.this, "Error", Toast.LENGTH_SHORT).show();
                         logOut();
                         break;

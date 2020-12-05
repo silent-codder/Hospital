@@ -112,13 +112,13 @@ public class PatientMainActivity extends AppCompatActivity {
                 }
 
                 if (selectFragment != null){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectFragment).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectFragment).addToBackStack(null).commit();
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
             }
         });
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new PatientHomeFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new PatientHomeFragment()).addToBackStack(null).commit();
 
     }
     private void removeColor(NavigationView view) {

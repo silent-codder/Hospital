@@ -62,7 +62,7 @@ public class DoctorChildFileFragment extends Fragment {
     CircleImageView boy,girl;
     FirebaseFirestore firebaseFirestore;
     FirebaseAuth firebaseAuth;
-    String FileNumber,UserId,Id;
+    String FileNumber,UserId,Id,File;
     ProgressDialog pd;
     Button mBtnAddSymptom,mBtnAddPrescription;
     Dialog dialog;
@@ -74,6 +74,7 @@ public class DoctorChildFileFragment extends Fragment {
 
     StorageReference storageReference;
     private Uri profileImgUri;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -88,32 +89,30 @@ public class DoctorChildFileFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recycleView);
         swipeRefreshLayout = view.findViewById(R.id.refresh);
         firebaseFirestore = FirebaseFirestore.getInstance();
-        dialog = new Dialog(getContext());
+
         mBtnAddPrescription = view.findViewById(R.id.btnAddPrescription);
         mBtnAddSymptom = view.findViewById(R.id.btnAddSymptoms);
+
         storageReference = FirebaseStorage.getInstance().getReference();
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        dialog = new Dialog(getContext());
         pd = new ProgressDialog(getContext());
         pd.setMessage("Fetching data...");
         pd.show();
-
-
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                loadData();
-            }
-        });
-
 
         Bundle bundle = this.getArguments();
         if (bundle!=null){
             FileNumber = bundle.getString("FileNumber");
             Id = bundle.getString("UserId");
         }
-
-        loadData();
-        firebaseFirestore = FirebaseFirestore.getInstance();
-        firebaseAuth = FirebaseAuth.getInstance();
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadData();
+            }
+        });
 
         firebaseFirestore.collection("Child-Details")
                 .whereEqualTo("FileNumber",FileNumber).get()
@@ -131,6 +130,7 @@ public class DoctorChildFileFragment extends Fragment {
                                     String FileNo = childData.setFileNumber(doc.getString("FileNumber"));
                                     String Id = childData.setParentId(doc.getString("ParentId"));
                                     UserId = Id;
+                                    File = FileNo;
 
                                     if (Gender.equals("Boy")){
                                         boy.setVisibility(View.VISIBLE);
@@ -153,120 +153,130 @@ public class DoctorChildFileFragment extends Fragment {
                     }
                 });
 
+        loadData();
+
 
         //buttons
         mBtnAddSymptom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.setContentView(R.layout.add_symptom_dialog);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-
-                EditText Symptoms = dialog.findViewById(R.id.symptoms);
-                Button BtnAddImg = dialog.findViewById(R.id.btnAddImage);
-                Button BtnDone = dialog.findViewById(R.id.btnDone);
-
-                BtnDone.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String symptoms = Symptoms.getText().toString();
-                        if (TextUtils.isEmpty(symptoms)){
-                            Symptoms.requestFocus();
-                            Toast.makeText(getContext(), "Add Symptom", Toast.LENGTH_SHORT).show();
-                        }else {
-                            pd.setMessage("wait..");
-                            pd.show();
-                            HashMap<String,Object> map = new HashMap<>();
-                            map.put("Symptoms",symptoms);
-                            map.put("TimeStamp",System.currentTimeMillis());
-                            map.put("UserId",UserId);
-                            firebaseFirestore.collection("Child-File").document(String.valueOf(System.currentTimeMillis())).set(map)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()){
-                                                pd.dismiss();
-                                                dialog.dismiss();
-                                                Toast.makeText(getContext(), "Add Successfully", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    pd.dismiss();
-                                    Toast.makeText(getContext(), "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-                    }
-                });
-
-                BtnAddImg.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        selectImg();
-                    }
-                });
+               AddSymptoms();
             }
         });
 
         mBtnAddPrescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.setContentView(R.layout.add_prescription_dialog);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-
-                EditText Prescription = dialog.findViewById(R.id.prescription);
-                Button BtnAddImg = dialog.findViewById(R.id.btnAddImage);
-                Button BtnDone = dialog.findViewById(R.id.btnDone);
-
-                BtnDone.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String prescription = Prescription.getText().toString();
-                        if (TextUtils.isEmpty(prescription)){
-                            Prescription.requestFocus();
-                            Toast.makeText(getContext(), "Add Symptom", Toast.LENGTH_SHORT).show();
-                        }else {
-                            pd.setMessage("wait..");
-                            pd.show();
-                            HashMap<String,Object> map = new HashMap<>();
-                            map.put("Prescription",prescription);
-                            map.put("TimeStamp",System.currentTimeMillis());
-                            map.put("UserId",UserId);
-                            map.put("ImageUrl","");
-                            firebaseFirestore.collection("Child-File").document(String.valueOf(System.currentTimeMillis())).set(map)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()){
-                                                pd.dismiss();
-                                                dialog.dismiss();
-                                                Toast.makeText(getContext(), "Add Successfully", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    pd.dismiss();
-                                    Toast.makeText(getContext(), "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-                    }
-                });
-
-                BtnAddImg.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        selectImg();
-                    }
-                });
-
+                AddPrescription();
             }
         });
+
         return view;
+    }
+
+    private void AddSymptoms() {
+        dialog.setContentView(R.layout.add_symptom_dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+
+        EditText Symptoms = dialog.findViewById(R.id.symptoms);
+        Button BtnAddImg = dialog.findViewById(R.id.btnAddImage);
+        Button BtnDone = dialog.findViewById(R.id.btnDone);
+
+        BtnDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String symptoms = Symptoms.getText().toString();
+                if (TextUtils.isEmpty(symptoms)){
+                    Symptoms.requestFocus();
+                    Toast.makeText(getContext(), "Add Symptom", Toast.LENGTH_SHORT).show();
+                }else {
+                    pd.setMessage("wait..");
+                    pd.show();
+                    HashMap<String,Object> map = new HashMap<>();
+                    map.put("Symptoms",symptoms);
+                    map.put("TimeStamp",System.currentTimeMillis());
+                    map.put("UserId",UserId);
+                    firebaseFirestore.collection("Child-File").document(String.valueOf(System.currentTimeMillis())).set(map)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()){
+                                        pd.dismiss();
+                                        dialog.dismiss();
+                                        Toast.makeText(getContext(), "Add Successfully", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            pd.dismiss();
+                            Toast.makeText(getContext(), "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        });
+
+        BtnAddImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectImg();
+            }
+        });
+    }
+
+    private void AddPrescription() {
+        dialog.setContentView(R.layout.add_prescription_dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+
+        EditText Prescription = dialog.findViewById(R.id.prescription);
+        Button BtnAddImg = dialog.findViewById(R.id.btnAddImage);
+        Button BtnDone = dialog.findViewById(R.id.btnDone);
+
+        BtnDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String prescription = Prescription.getText().toString();
+                if (TextUtils.isEmpty(prescription)){
+                    Prescription.requestFocus();
+                    Toast.makeText(getContext(), "Add Symptom", Toast.LENGTH_SHORT).show();
+                }else {
+                    pd.setMessage("wait..");
+                    pd.show();
+                    HashMap<String,Object> map = new HashMap<>();
+                    map.put("Prescription",prescription);
+                    map.put("TimeStamp",System.currentTimeMillis());
+                    map.put("UserId",UserId);
+                    map.put("ImageUrl","");
+                    firebaseFirestore.collection("Child-File").document(String.valueOf(System.currentTimeMillis())).set(map)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()){
+                                        pd.dismiss();
+                                        dialog.dismiss();
+                                        Toast.makeText(getContext(), "Add Successfully", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            pd.dismiss();
+                            Toast.makeText(getContext(), "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        });
+
+        BtnAddImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectImg();
+            }
+        });
     }
 
     private void loadData() {
@@ -279,7 +289,9 @@ public class DoctorChildFileFragment extends Fragment {
 
         CollectionReference appointmentRef = firebaseFirestore.collection("Child-File");
 
-        Query query = appointmentRef.whereEqualTo("UserId",Id);
+
+
+        Query query = appointmentRef.whereEqualTo("FileNumber",File);
 
         query.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -299,7 +311,7 @@ public class DoctorChildFileFragment extends Fragment {
     private void selectImg() {
         CropImage.activity()
                 .setGuidelines(CropImageView.Guidelines.ON)
-                .setOutputCompressQuality(10)
+                .setOutputCompressQuality(40)
                 .start(getContext(),this);
     }
 
@@ -365,6 +377,5 @@ public class DoctorChildFileFragment extends Fragment {
 
         }
     }
-
 
 }

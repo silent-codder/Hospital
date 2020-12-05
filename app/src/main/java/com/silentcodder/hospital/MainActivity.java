@@ -1,8 +1,10 @@
 package com.silentcodder.hospital;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -12,10 +14,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.silentcodder.hospital.Counter.CounterMainActivity;
 import com.silentcodder.hospital.Doctor.DoctorMainActivity;
 import com.silentcodder.hospital.Patient.PatientMainActivity;
@@ -26,13 +33,20 @@ public class MainActivity extends AppCompatActivity {
 
     Button mBtnPatient,mBtnHospitalStaff;
     Dialog dialog;
+    String isUser,UserId;
 
+    FirebaseFirestore firebaseFirestore;
+    FirebaseAuth firebaseAuth;
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mBtnPatient = findViewById(R.id.btnPatient);
         mBtnHospitalStaff = findViewById(R.id.btnHospitalStaff);
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        progressDialog = new ProgressDialog(this);
 
         dialog = new Dialog(this);
 
@@ -45,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
         mBtnHospitalStaff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                startActivity(new Intent(MainActivity.this,HospitalStaffLogin.class));
                 dialog.setContentView(R.layout.hospital_staff_selection);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.setCanceledOnTouchOutside(false);
@@ -125,11 +138,46 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        mBtnHospitalStaff.setVisibility(View.VISIBLE);
+        mBtnPatient.setVisibility(View.VISIBLE);
+        TextView UpperTxt = findViewById(R.id.upperTxt);
+        UpperTxt.setVisibility(View.VISIBLE);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null){
-            startActivity(new Intent(MainActivity.this, DoctorMainActivity.class));
-            finish();
+            mBtnPatient.setVisibility(View.INVISIBLE);
+            mBtnHospitalStaff.setVisibility(View.INVISIBLE);
+            UpperTxt.setVisibility(View.INVISIBLE);
+            TextView CenterTxt = findViewById(R.id.centerTxt);
+            CenterTxt.setVisibility(View.VISIBLE);
+            progressDialog.setMessage("Please wait \nSetup environment..");
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.show();
+
+            UserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+            firebaseFirestore.collection("Parent-Details").document(UserId)
+                    .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    isUser = task.getResult().getString("isUser");
+                    if (isUser.equals("1")){
+                        progressDialog.dismiss();
+                        startActivity(new Intent(MainActivity.this, PatientMainActivity.class));
+                        finish();
+                    }else if (isUser.equals("2")){
+                        progressDialog.dismiss();
+                        startActivity(new Intent(MainActivity.this, DoctorMainActivity.class));
+                        finish();
+                    }else if (isUser.equals("3")){
+                        progressDialog.dismiss();
+                        startActivity(new Intent(MainActivity.this, CounterMainActivity.class));
+                        finish();
+                    }
+                }
+            });
+
         }
+
     }
 }

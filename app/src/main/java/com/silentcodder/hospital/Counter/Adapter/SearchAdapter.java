@@ -1,6 +1,7 @@
 package com.silentcodder.hospital.Counter.Adapter;
 
 import android.annotation.SuppressLint;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,12 +9,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.silentcodder.hospital.Counter.CounterChildFile;
 import com.silentcodder.hospital.Patient.Model.ChildData;
 import com.silentcodder.hospital.R;
 
@@ -58,6 +62,19 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         holder.mChildName.setText(ChildName);
         holder.mChildDob.setText(ChildDob);
         holder.mFileNumber.setText(FileNumber);
+
+        holder.mOpenFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                Fragment fragment = new CounterChildFile();
+                Bundle bundle = new Bundle();
+                bundle.putString("FileNumber" , FileNumber);
+                bundle.putString("UserId",Id);
+                fragment.setArguments(bundle);
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).addToBackStack(null).commit();
+            }
+        });
 
         firebaseFirestore.collection("Parent-Details").document(Id).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

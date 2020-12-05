@@ -102,8 +102,8 @@ public class CounterMainActivity extends AppCompatActivity {
                         selectFragment = new CounterProfileFragment();
                         break;
                     case R.id.nav_counter_logout :
-                        Toast.makeText(CounterMainActivity.this, "Error", Toast.LENGTH_SHORT).show();
-                       // logOut();
+                        Toast.makeText(CounterMainActivity.this, "Log Out", Toast.LENGTH_SHORT).show();
+                        logOut();
                         break;
                 }
 

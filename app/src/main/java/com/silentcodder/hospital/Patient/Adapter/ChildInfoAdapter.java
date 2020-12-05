@@ -103,8 +103,9 @@ public class ChildInfoAdapter extends RecyclerView.Adapter<ChildInfoAdapter.View
                 Fragment fragment = new PatientChildFileFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("FileNumber" , FileNumber);
+                bundle.putString("UserId",UserId);
                 fragment.setArguments(bundle);
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).commit();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).addToBackStack(null).commit();
             }
         });
 

@@ -136,6 +136,7 @@ public class PatientRegister_3 extends AppCompatActivity {
                     mWeight.requestFocus();
                 }else {
                     pd.setMessage("uploading...");
+                    pd.setCanceledOnTouchOutside(false);
                     pd.show();
 
                     HashMap<String,Object> map = new HashMap<>();

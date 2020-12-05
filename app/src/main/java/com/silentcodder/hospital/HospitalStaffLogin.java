@@ -88,7 +88,8 @@ public class HospitalStaffLogin extends AppCompatActivity {
                     }else if (Email.equals("doctor@gmail.com")&& RoleId.equals("Doctor")){
                         doctorLogin(Email,Password);
                     }else if (Email.equals("medical@gmail.com")&& RoleId.equals("Medical")){
-                        medicalLogin(Email,Password);
+                        Toast.makeText(HospitalStaffLogin.this, "Working on it", Toast.LENGTH_SHORT).show();
+                        //medicalLogin(Email,Password);
                     }else {
                         pd.dismiss();
                         Toast.makeText(HospitalStaffLogin.this, "Incorrect information", Toast.LENGTH_SHORT).show();
@@ -107,8 +108,6 @@ public class HospitalStaffLogin extends AppCompatActivity {
                         if (task.isSuccessful()){
                             pd.dismiss();
                             Toast.makeText(HospitalStaffLogin.this, "Medical", Toast.LENGTH_SHORT).show();
-//                            Intent intent = new Intent(HospitalStaffLogin.this,CounterMainActivity.class);
-//                            startActivity(intent);
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -159,4 +158,5 @@ public class HospitalStaffLogin extends AppCompatActivity {
             }
         });
     }
+
 }

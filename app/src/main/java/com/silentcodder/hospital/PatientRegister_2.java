@@ -73,6 +73,7 @@ public class PatientRegister_2 extends AppCompatActivity {
                 }else {
 
                     pd.setMessage("Uploading...");
+                    pd.setCanceledOnTouchOutside(false);
                     pd.show();
 
                     HashMap<String , Object> map = new HashMap<>();
@@ -81,6 +82,7 @@ public class PatientRegister_2 extends AppCompatActivity {
                     map.put("Address",Address);
                     map.put("User-Id",UserId);
                     map.put("Mobile-Number",mPhone);
+                    map.put("isUser","1");
 
                     firebaseFirestore.collection("Parent-Details").document(UserId).set(map)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {

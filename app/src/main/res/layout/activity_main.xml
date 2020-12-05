@@ -14,11 +14,13 @@
         android:src="@drawable/bg_img"/>
 
     <TextView
+        android:id="@+id/upperTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Smart Hospital"
         android:textColor="@color/purple_700"
         android:textSize="40sp"
+        android:visibility="gone"
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="140dp"/>
@@ -34,6 +36,7 @@
             android:textStyle="bold"
             android:textSize="18sp"
             android:textAllCaps="false"
+            android:visibility="gone"
             android:textColor="@color/white"
             android:text="Patient"/>
         <Button
@@ -43,10 +46,25 @@
             android:textStyle="bold"
             android:textSize="18sp"
             android:textAllCaps="false"
+            android:visibility="gone"
             android:textColor="@color/white"
             android:layout_below="@id/btnPatient"
             android:text="Hospital Staff"/>
 
+
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/centerTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Smart Hospital"
+        android:textColor="@color/purple_700"
+        android:textSize="40sp"
+        android:layout_centerVertical="true"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="140dp"/>
 
   </RelativeLayout>

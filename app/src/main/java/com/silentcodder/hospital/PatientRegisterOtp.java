@@ -17,8 +17,9 @@ import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
-import com.google.firebase.auth.PhoneAuthOptions;
+//import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.silentcodder.hospital.Patient.PatientMainActivity;
 
 import java.util.concurrent.TimeUnit;
 
@@ -42,9 +43,9 @@ public class PatientRegisterOtp extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         pd = new ProgressDialog(this);
         pd.setMessage("Please wait...");
-        pd.show();
+        pd.setCanceledOnTouchOutside(false);
         firebaseAuth.setLanguageCode("Eng");
-        GetOTP();
+        InitiateOtp();
 
         mBtnVerifyOTP.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,12 +55,37 @@ public class PatientRegisterOtp extends AppCompatActivity {
                 }else if (mGetOTP.getText().toString().length()!=6){
                     Toast.makeText(getApplicationContext(), "Incorrect OTP", Toast.LENGTH_SHORT).show();
                 }else {
-                    pd.dismiss();
+                    pd.show();
                     PhoneAuthCredential credential = PhoneAuthProvider.getCredential(OtpId,mGetOTP.getText().toString());
                     signInWithPhoneAuthCredential(credential);
                 }
             }
         });
+    }
+
+    private void InitiateOtp() {
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                mPhoneNumber,        // Phone number to verify
+                60,                 // Timeout duration
+                TimeUnit.SECONDS,   // Unit of timeout
+                this,               // Activity (for callback binding)
+                new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                    @Override
+                    public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                        OtpId = s;
+                    }
+
+                    @Override
+                    public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+                        signInWithPhoneAuthCredential(phoneAuthCredential);
+                    }
+
+                    @Override
+                    public void onVerificationFailed(@NonNull FirebaseException e) {
+                        Toast.makeText(PatientRegisterOtp.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });        // OnVerificationStateChangedCallbacks
+
     }
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
@@ -68,8 +94,8 @@ public class PatientRegisterOtp extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-
-                            Intent intent = new Intent(PatientRegisterOtp.this, PatientRegister_2.class);
+                            pd.dismiss();
+                            Intent intent = new Intent(PatientRegisterOtp.this,PatientRegister_2.class);
                             intent.putExtra("Mobile",mPhoneNumber);
                             startActivity(intent);
                             finish();
@@ -78,36 +104,5 @@ public class PatientRegisterOtp extends AppCompatActivity {
                         }
                     }
                 });
-    }
-
-    private void GetOTP() {
-        PhoneAuthOptions options = PhoneAuthOptions.newBuilder(firebaseAuth)
-                .setPhoneNumber(mPhoneNumber)
-                .setTimeout(60L, TimeUnit.SECONDS)
-                .setActivity(this)
-                .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-                    @Override
-                    public void onCodeSent(String verificationId,
-                                           PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-                        pd.dismiss();
-                        OtpId = verificationId;
-
-                    }
-
-                    @Override
-                    public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
-                        pd.dismiss();
-
-                        signInWithPhoneAuthCredential(phoneAuthCredential);
-
-                    }
-
-                    @Override
-                    public void onVerificationFailed(FirebaseException e) {
-                        Toast.makeText(PatientRegisterOtp.this, "Server Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .build();
-        PhoneAuthProvider.verifyPhoneNumber(options);
     }
 }

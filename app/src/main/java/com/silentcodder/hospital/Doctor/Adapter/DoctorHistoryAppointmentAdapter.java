@@ -43,6 +43,7 @@ public class DoctorHistoryAppointmentAdapter extends RecyclerView.Adapter<Doctor
         String Gender = appointmentHistory.get(position).getChildGender();
         String Date = appointmentHistory.get(position).getChildAppointmentDate();
         String FileNumber = appointmentHistory.get(position).getChildFileNumber();
+        String UserId = appointmentHistory.get(position).getID();
 
         String AppointmentHistoryId = appointmentHistory.get(position).AppointmentHistoryId;
 
@@ -63,6 +64,7 @@ public class DoctorHistoryAppointmentAdapter extends RecyclerView.Adapter<Doctor
                 Fragment fragment = new CounterChildFile();
                 Bundle bundle = new Bundle();
                 bundle.putString("FileNumber" , FileNumber);
+                bundle.putString("UserId",UserId);
                 fragment.setArguments(bundle);
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).addToBackStack(null).commit();
             }

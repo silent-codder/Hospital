@@ -14,13 +14,13 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         app:civ_border_width="1dp"
-        android:src="@drawable/patient"
+        android:src="@drawable/doctor"
         android:layout_centerHorizontal="true"/>
     <TextView
         android:id="@+id/firstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Counter"
+        android:text="Smart Hospital"
         android:textColor="@color/purple_500"
         android:layout_below="@id/counterProfile"
         android:layout_centerHorizontal="true"

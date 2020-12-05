@@ -45,6 +45,7 @@ public class CounterAppointmentHistoryAdapter extends RecyclerView.Adapter<Count
         String Gender = appointmentHistory.get(position).getChildGender();
         String Date = appointmentHistory.get(position).getChildAppointmentDate();
         String FileNumber = appointmentHistory.get(position).getChildFileNumber();
+        String Id = appointmentHistory.get(position).getID();
 
         if (Gender.equals("Boy") || Gender.equals("Other")){
             holder.boy.setVisibility(View.VISIBLE);
@@ -64,6 +65,7 @@ public class CounterAppointmentHistoryAdapter extends RecyclerView.Adapter<Count
                 Fragment fragment = new CounterChildFile();
                 Bundle bundle = new Bundle();
                 bundle.putString("FileNumber" , FileNumber);
+                bundle.putString("UserId",Id);
                 fragment.setArguments(bundle);
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).addToBackStack(null).commit();
             }
