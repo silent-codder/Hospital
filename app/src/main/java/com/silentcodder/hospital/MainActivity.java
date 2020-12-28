@@ -160,20 +160,25 @@ public class MainActivity extends AppCompatActivity {
                     .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    isUser = task.getResult().getString("isUser");
-                    if (isUser.equals("1")){
-                        progressDialog.dismiss();
-                        startActivity(new Intent(MainActivity.this, PatientMainActivity.class));
-                        finish();
-                    }else if (isUser.equals("2")){
-                        progressDialog.dismiss();
-                        startActivity(new Intent(MainActivity.this, DoctorMainActivity.class));
-                        finish();
-                    }else if (isUser.equals("3")){
-                        progressDialog.dismiss();
-                        startActivity(new Intent(MainActivity.this, CounterMainActivity.class));
-                        finish();
-                    }
+                  if (task.isSuccessful()){
+                      isUser = task.getResult().getString("isUser");
+                      if (isUser.equals("1")){
+                          //1 for patient login
+                          progressDialog.dismiss();
+                          startActivity(new Intent(MainActivity.this, PatientMainActivity.class));
+                          finish();
+                      }else if (isUser.equals("2")){
+                          //2 for doctor login
+                          progressDialog.dismiss();
+                          startActivity(new Intent(MainActivity.this, DoctorMainActivity.class));
+                          finish();
+                      }else if (isUser.equals("3")){
+                          // 3 for counter login
+                          progressDialog.dismiss();
+                          startActivity(new Intent(MainActivity.this, CounterMainActivity.class));
+                          finish();
+                      }
+                  }
                 }
             });
 
